@@ -23,38 +23,54 @@ function RecipesNew() {
   )
 }
 
-function RecipesIndex() {
+function RecipesIndex(props) {
   return (
     <div id="recipes-index">
-      <h1>All Recipes</h1>
-      <div className="recipes">
-        <h2>Raw Eggs</h2>
-        <img src="https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg" />
-        <p>Chef: Peter Jang</p>
-        <button>More Info</button>
-      </div>
-      <div className="recipes">
-        <h2>Mud Pie</h2>
-        <img src="https://static.onecms.io/wp-content/uploads/sites/9/2017/12/mud-pie-XL-RECIPE2016.jpg" />
-        <p>Chef: Jay Wengrow</p>
-        <button>More Info</button>
-      </div>
-      <div className="recipes">
-        <h2>Butter Chicken</h2>
-        <img src="https://img.taste.com.au/qPAElV3h/taste/2013/07/easy-butter-chicken-image1-197844-1.jpg" />
-        <p>Chef: Leon Shimizu</p>
-        <button>More Info</button>
-      </div>
+      <h1>All {props.recipes.length} recipes</h1>
+      {props.recipes.map((recipe) => (
+        <div key={recipe.id} className="recipes">
+          <h2>{recipe.title}</h2>
+          <img src={recipe.image_url} alt="" />
+          <p>Chef: {recipe.chef}</p>
+          <button>More info</button>
+        </div>
+      ))}
     </div>
   )
 }
 
-
 function RecipesPage() {
+  let recipes = [
+    {
+      id: 1,
+      title: "Raw Eggs",
+      chef: "Peter Jang",
+      image_url: "https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg"
+    },
+    {
+      id: 2,
+      title: "Mud Pie",
+      chef: "Jay Wengrow",
+      image_url: "https://static.onecms.io/wp-content/uploads/sites/9/2017/12/mud-pie-XL-RECIPE2016.jpg"
+    },
+    {
+      id: 3,
+      title: "Butter Chicken",
+      chef: "Leon Shimizu",
+      image_url: "https://img.taste.com.au/qPAElV3h/taste/2013/07/easy-butter-chicken-image1-197844-1.jpg"
+    },
+    {
+      id: 4,
+      title: "Cheese Pizza",
+      chef: "Anastasia Shimizu",
+      image_url: "https://img.taste.com.au/qPAElV3h/taste/2013/07/easy-butter-chicken-image1-197844-1.jpg"
+    }
+  ]
+
   return (
     <main>
       <RecipesNew />
-      <RecipesIndex />
+      <RecipesIndex recipes={recipes} />
     </main>
   )
 }
