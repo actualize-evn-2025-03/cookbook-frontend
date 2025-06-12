@@ -14,12 +14,16 @@ export function RecipesPage() {
       })
   }
 
+  const handleShow = (recipe) => {
+    console.log("handleShow", recipe);
+  }
+
   useEffect(handleIndex, [])
 
   return (
     <main>
       <RecipesNew />
-      <RecipesIndex recipes={recipes} />
+      <RecipesIndex recipes={recipes} onShow={handleShow} />
     </main>
   );
 }
