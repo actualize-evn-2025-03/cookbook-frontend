@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { RecipesIndex } from "./RecipesIndex";
 import { RecipesNew } from "./RecipesNew";
 import { Modal } from './Modal';
+import { RecipesShow } from './RecipesShow';
 
 export function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
@@ -30,9 +31,7 @@ export function RecipesPage() {
       <RecipesNew />
       <RecipesIndex recipes={recipes} onShow={handleShow} />
       <Modal show={isRecipeShowVisible} onClose={() => setIsRecipeShowVisible(false)} >
-        <h2>{currentRecipe.title}</h2>
-        <p>Chef: {currentRecipe.chef}</p>
-        <p>Directions: {currentRecipe.directions}</p>
+        <RecipesShow recipe={currentRecipe} />
       </Modal>
     </main>
   );
