@@ -28,10 +28,6 @@ export function RecipesPage() {
     console.log("handleCreate!!!");
     axios.post("http://localhost:3000/recipes.json", params)
       .then((response) => {
-        // console.log(response.data);
-        // let copiedRecipes = Array.from(recipes);
-        // copiedRecipes.push(response.data);
-        // setRecipes(copiedRecipes);
         setRecipes([...recipes, response.data]);
       })
   }
