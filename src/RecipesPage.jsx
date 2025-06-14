@@ -13,13 +13,11 @@ export function RecipesPage() {
   const handleIndex = () => {
     axios.get("http://localhost:3000/recipes.json")
     .then((response) => {
-      console.log(response.data);
       setRecipes(response.data);
     })
   }
   
   const handleShow = (recipe) => {
-    console.log("handleShow", recipe);
     setIsRecipeShowVisible(true);
     setCurrentRecipe(recipe);
   }
@@ -33,7 +31,6 @@ export function RecipesPage() {
   }
 
   const handleUpdate = (recipe, params) => {
-    console.log("handleUpdate!!!");
     axios.patch(`http://localhost:3000/recipes/${recipe.id}.json`, params)
       .then((response) => {
         // let updatedRecipes = [];
@@ -53,6 +50,15 @@ export function RecipesPage() {
       })
   }
 
+  const handleDestroy = (recipe) => {
+    axios.delete(`http://localhost:3000/recipes/${recipe.id}.json`)
+      .then((response) => {
+        console.log(response.data);
+        setRecipes(recipes.filter((r) => r.id !== recipe.id));
+        setIsRecipeShowVisible(false);
+      })
+  }
+
   useEffect(handleIndex, [])
 
   return (
@@ -60,7 +66,7 @@ export function RecipesPage() {
       <RecipesNew onCreate={handleCreate} />
       <RecipesIndex recipes={recipes} onShow={handleShow} />
       <Modal show={isRecipeShowVisible} onClose={() => setIsRecipeShowVisible(false)} >
-        <RecipesShow recipe={currentRecipe} onUpdate={handleUpdate} />
+        <RecipesShow recipe={currentRecipe} onUpdate={handleUpdate} onDestroy={handleDestroy} />
       </Modal>
     </main>
   );

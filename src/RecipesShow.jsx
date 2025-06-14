@@ -29,6 +29,7 @@ export function RecipesShow(props) {
           Image url: <input defaultValue={props.recipe.image_url} name="image_url" type="text" />
         </div>
         <button type="submit">Update Recipe</button>
+        <button onClick={() => props.onDestroy(props.recipe)}>Destroy Recipe</button>
       </form>
     </div>
   )
