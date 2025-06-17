@@ -11,19 +11,19 @@ export function RecipesNew(props) {
     <div id="recipes-new">
       <h1>New Recipe</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          Title: <input name="title" type="text" />
+        <div className="mb-3">
+          Title: <input className="form-control" name="title" type="text" />
         </div>
-        <div>
-          Chef: <input name="chef" type="text" />
+        <div className="mb-3">
+          Chef: <input className="form-control" name="chef" type="text" />
         </div>
-        <div>
-          Directions: <input name="directions" type="text" />
+        <div className="mb-3">
+          Directions: <input className="form-control" name="directions" type="text" />
         </div>
-        <div>
-          Image url: <input name="image_url" type="text" />
+        <div className="mb-3">
+          Image url: <input className="form-control" name="image_url" type="text" />
         </div>
-        <button type="submit">Create Recipe</button>
+        <button className="btn btn-primary" type="submit">Create Recipe</button>
       </form>
     </div>
   );

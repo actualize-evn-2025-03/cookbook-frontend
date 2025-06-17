@@ -5,3 +5,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+#root {
+  font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+  font-weight: normal;
+}

@@ -62,7 +62,7 @@ export function RecipesPage() {
   useEffect(handleIndex, [])
 
   return (
-    <main>
+    <main className='container'>
       <RecipesNew onCreate={handleCreate} />
       <RecipesIndex recipes={recipes} onShow={handleShow} />
       <Modal show={isRecipeShowVisible} onClose={() => setIsRecipeShowVisible(false)} >
