@@ -1,37 +1,59 @@
+import { useState } from "react";
+import { SignupPage } from "./SignupPage";
+import { LoginPage } from "./LoginPage";
+import { LogoutLink } from "./LogoutLink";
+
 export function Header() {
+  const [showSignup, setShowSignup] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  // // Convert “is there an 'email' key in localStorage?” into a true/false value for the initial logged-in state.
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("email"));
+
+  const handleSignupClick = () => {
+    setShowSignup(!showSignup);
+    setShowLogin(false);
+  };
+
+  const handleLoginClick = () => {
+    setShowLogin(!showLogin);
+    setShowSignup(false);
+  };
+
   return (
     <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark-subtle">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Recipes Frontend</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">All Recipes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">New Recipe</a>
-              </li>
-            </ul>
+      <nav>
+        <div>
+          <a href="#">Cookbook Frontend</a>
+          <div>
+            {isLoggedIn ? (
+              <LogoutLink />
+            ) : (
+              <>
+                <button onClick={handleSignupClick}>
+                  {showSignup ? "Hide Signup" : "Sign Up"}
+                </button>
+                <button onClick={handleLoginClick}>
+                  {showLogin ? "Hide Login" : "Login"}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </nav>
+      
+      {/* Show signup form */}
+      {showSignup && (
+        <div>
+          <SignupPage />
+        </div>
+      )}
+      
+      {/* Show login form */}
+      {showLogin && (
+        <div>
+          <LoginPage />
+        </div>
+      )}
     </header>
   );
 }
-
-// function Header() {
-//   return (
-//     <header>
-//       <a href="#">Home</a> | <a href="#recipes-index">All Recipes</a> | <a href="#recipes-new">New Recipe</a>
-//     </header>
-//   );
-// }
-
-// export default Header;
