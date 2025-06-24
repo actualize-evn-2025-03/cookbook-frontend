@@ -1,59 +1,26 @@
-import { useState } from "react";
-import { SignupPage } from "./SignupPage";
-import { LoginPage } from "./LoginPage";
+import { Link } from "react-router-dom";
 import { LogoutLink } from "./LogoutLink";
 
 export function Header() {
-  const [showSignup, setShowSignup] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  // // Convert “is there an 'email' key in localStorage?” into a true/false value for the initial logged-in state.
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("email"));
-
-  const handleSignupClick = () => {
-    setShowSignup(!showSignup);
-    setShowLogin(false);
-  };
-
-  const handleLoginClick = () => {
-    setShowLogin(!showLogin);
-    setShowSignup(false);
-  };
+  // Check if user is logged in by looking for email in localStorage
+  const isLoggedIn = !!localStorage.getItem("email");
 
   return (
     <header>
       <nav>
         <div>
-          <a href="#">Cookbook Frontend</a>
+          <Link to="/">Cookbook App</Link>
           <div>
             {isLoggedIn ? (
               <LogoutLink />
             ) : (
               <>
-                <button onClick={handleSignupClick}>
-                  {showSignup ? "Hide Signup" : "Sign Up"}
-                </button>
-                <button onClick={handleLoginClick}>
-                  {showLogin ? "Hide Login" : "Login"}
-                </button>
+                <Link to="/signup">Sign Up</Link> | <Link to="/login">Login</Link>
               </>
             )}
           </div>
         </div>
       </nav>
-      
-      {/* Show signup form */}
-      {showSignup && (
-        <div>
-          <SignupPage />
-        </div>
-      )}
-      
-      {/* Show login form */}
-      {showLogin && (
-        <div>
-          <LoginPage />
-        </div>
-      )}
     </header>
   );
 }
